@@ -4,7 +4,7 @@ import { useCallback, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { statusTabList } from '@/constants/statuses'
-import TuneIcon from '@mui/icons-material/Tune'
+import { Icon } from '@iconify/react'
 import TabLabel from '@/components/Tab/TabLabel'
 import { StyledTab, StyledTabs } from '@/components/StyledTabs/index'
 import { filterActions } from '@/store/filters/filters.slice'
@@ -85,7 +85,7 @@ const Filters = () => {
           ))}
         </StyledTabs>
         <Button
-          startIcon={<TuneIcon />}
+          startIcon={<Icon icon="eva:settings-outline" />}
           variant={filters?.is_open ? 'outlined' : 'contained'}
           onClick={() => dispatch(filterActions.openFilters(!filters?.is_open))}
         >

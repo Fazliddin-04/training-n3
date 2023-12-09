@@ -1,26 +1,26 @@
-import SearchIcon from "@mui/icons-material/Search";
-import { useTranslation } from "react-i18next";
-import InputV2 from "@/components/Input/Inputv2";
-import { InputAdornment } from "@mui/material";
+import { useTranslation } from 'react-i18next'
+import InputV2 from '@/components/Input/Inputv2'
+import { InputAdornment } from '@mui/material'
+import { Icon } from '@iconify/react'
 
 const Search = ({
   setSearch,
-  placeholder = "search",
+  placeholder = 'search',
   debounceTime = 300,
-  size = "normal",
-  className = "",
+  size = 'normal',
+  className = '',
   fullWidth = false,
   ...props
 }) => {
-  const { t } = useTranslation();
-  let debounce = setTimeout(() => {}, 0);
+  const { t } = useTranslation()
+  let debounce = setTimeout(() => {}, 0)
 
   const onSearch = (e) => {
-    clearTimeout(debounce);
+    clearTimeout(debounce)
     debounce = setTimeout(() => {
-      setSearch(e.target.value);
-    }, debounceTime);
-  };
+      setSearch(e.target.value)
+    }, debounceTime)
+  }
 
   return (
     <InputV2
@@ -31,12 +31,15 @@ const Search = ({
       size={size}
       startAdornment={
         <InputAdornment position="start">
-          <SearchIcon style={{ color: "var(--primary-color)" }} />
+          <Icon
+            icon="eva:search-outline"
+            style={{ color: 'var(--primary-color)' }}
+          />
         </InputAdornment>
       }
       {...props}
     />
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

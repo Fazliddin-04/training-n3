@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Tag from '@/components/Tag'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import { Icon } from '@iconify/react'
 import orderTimer from '@/helpers/orderTimer'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
@@ -133,7 +133,7 @@ function Timer({ record, operatorTimer, color, size = 'large', ...props }) {
       {...props}
     >
       <span className="flex items-center">
-        <AccessTimeIcon fontSize="small" className="mr-2" />
+        <Icon icon="eva:clock-outline" className="mr-2" />
         {operatorTimer
           ? procces_only_paid
             ? record?.payment_type === 'cash'

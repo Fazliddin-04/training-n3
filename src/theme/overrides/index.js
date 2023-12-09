@@ -19,7 +19,6 @@ import Rating from './Rating';
 import Slider from './Slider';
 import Button from './Button';
 import Switch from './Switch';
-import Select from './Select';
 import SvgIcon from './SvgIcon';
 import Tooltip from './Tooltip';
 import Popover from './Popover';
@@ -68,7 +67,6 @@ export default function ComponentsOverrides(theme) {
     Slider(theme),
     Button(theme),
     Switch(theme),
-    Select(theme),
     Pickers(theme),
     Stepper(theme),
     Tooltip(theme),

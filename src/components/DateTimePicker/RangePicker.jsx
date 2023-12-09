@@ -1,100 +1,97 @@
-import { useState, useEffect } from "react";
-import Picker from "rc-calendar/lib/Picker";
-import RangeCalendar from "rc-calendar/lib/RangeCalendar";
-import { ruRU } from "rc-calendar/lib/locale/ru_RU";
-import TimePickerPanel from "rc-time-picker/lib/Panel";
-import {
-  Close as CloseIcon,
-  CalendarToday as CalendarIcon,
-} from "@mui/icons-material";
-import "rc-calendar/assets/index.css";
-import "rc-time-picker/assets/index.css";
-import "./index.scss";
-import moment from "moment";
-import "moment/locale/ru";
+import { useState, useEffect } from 'react'
+import Picker from 'rc-calendar/lib/Picker'
+import RangeCalendar from 'rc-calendar/lib/RangeCalendar'
+import { ruRU } from 'rc-calendar/lib/locale/ru_RU'
+import TimePickerPanel from 'rc-time-picker/lib/Panel'
+import 'rc-calendar/assets/index.css'
+import 'rc-time-picker/assets/index.css'
+import './index.scss'
+import moment from 'moment'
+import 'moment/locale/ru'
+import { Icon } from '@iconify/react'
 
 const timePickerElement = (
   <TimePickerPanel
     defaultValue={[
-      moment("00:00:00", "HH:mm:ss"),
-      moment("23:59:59", "HH:mm:ss"),
+      moment('00:00:00', 'HH:mm:ss'),
+      moment('23:59:59', 'HH:mm:ss'),
     ]}
   />
-);
+)
 
 function newArray(start, end) {
-  const result = [];
+  const result = []
   for (let i = start; i < end; i++) {
-    result.push(i);
+    result.push(i)
   }
-  return result;
+  return result
 }
 
 function disabledTime(time, type) {
-  if (type === "start") {
+  if (type === 'start') {
     return {
       disabledHours() {
-        const hours = newArray(0, 60);
-        hours.splice(20, 4);
-        return hours;
+        const hours = newArray(0, 60)
+        hours.splice(20, 4)
+        return hours
       },
       disabledMinutes(h) {
         if (h === 20) {
-          return newArray(0, 31);
+          return newArray(0, 31)
         } else if (h === 23) {
-          return newArray(30, 60);
+          return newArray(30, 60)
         }
-        return [];
+        return []
       },
       disabledSeconds() {
-        return [55, 56];
+        return [55, 56]
       },
-    };
+    }
   }
   return {
     disabledHours() {
-      const hours = newArray(0, 60);
-      hours.splice(2, 6);
-      return hours;
+      const hours = newArray(0, 60)
+      hours.splice(2, 6)
+      return hours
     },
     disabledMinutes(h) {
       if (h === 20) {
-        return newArray(0, 31);
+        return newArray(0, 31)
       } else if (h === 23) {
-        return newArray(30, 60);
+        return newArray(30, 60)
       }
-      return [];
+      return []
     },
     disabledSeconds() {
-      return [55, 56];
+      return [55, 56]
     },
-  };
+  }
 }
 
-const formatStr = "DD.MM.YYYY";
+const formatStr = 'DD.MM.YYYY'
 function format(v) {
-  return v ? moment(v).locale("ru").format(formatStr) : "";
+  return v ? moment(v).locale('ru').format(formatStr) : ''
 }
 
 function isValidRange(v) {
-  return v && v[0] && v[1];
+  return v && v[0] && v[1]
 }
 
 function disabledDate(date) {
   if (!date) {
-    return false;
+    return false
   }
 
-  const current = moment().startOf("day").format();
-  return date.startOf("day").format() < current;
+  const current = moment().startOf('day').format()
+  return date.startOf('day').format() < current
 }
 
 export default function RangePicker({
-  className = "",
+  className = '',
   disabled,
   defaultValue = [],
   dateInputPlaceholder,
-  placeholder = "Select a date",
+  placeholder = 'Select a date',
   hideTimePicker = false,
   onChange = () => {},
   inputRef,
@@ -102,36 +99,36 @@ export default function RangePicker({
   disablePast,
   ...rest
 }) {
-  const [value, setValue] = useState([]);
-  const [hoverValue, setHoverValue] = useState([]);
-  const [isEmpty, setIsEmpty] = useState(false);
+  const [value, setValue] = useState([])
+  const [hoverValue, setHoverValue] = useState([])
+  const [isEmpty, setIsEmpty] = useState(false)
 
   useEffect(() => {
-    setValue(defaultValue ?? undefined);
-    setIsEmpty(defaultValue && true);
+    setValue(defaultValue ?? undefined)
+    setIsEmpty(defaultValue && true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   useEffect(() => {
-    dateValue && setValue(dateValue);
-    dateValue?.[0] ? setIsEmpty(false) : setIsEmpty(true);
-  }, [dateValue]);
+    dateValue && setValue(dateValue)
+    dateValue?.[0] ? setIsEmpty(false) : setIsEmpty(true)
+  }, [dateValue])
 
   const handleClick = (value) => {
-    setValue(value);
-    onChange(value);
-    setIsEmpty(false);
-  };
+    setValue(value)
+    onChange(value)
+    setIsEmpty(false)
+  }
 
   const onHoverChange = (hoverValue) => {
-    setHoverValue(hoverValue);
-  };
+    setHoverValue(hoverValue)
+  }
 
   const clearInput = () => {
-    setValue([]);
-    onChange([null, null]);
-    setIsEmpty(true);
-  };
+    setValue([])
+    onChange([null, null])
+    setIsEmpty(true)
+  }
 
   const calendar = (
     <RangeCalendar
@@ -139,14 +136,14 @@ export default function RangePicker({
       onHoverChange={onHoverChange}
       showWeekNumber={false}
       showDateInput={false}
-      dateInputPlaceholder={dateInputPlaceholder || ["start", "end"]}
+      dateInputPlaceholder={dateInputPlaceholder || ['start', 'end']}
       locale={ruRU}
       disabledTime={disabledTime}
       timePicker={!hideTimePicker ? timePickerElement : null}
-      style={{ marginTop: "3rem", width: "100%", height: "289px" }}
+      style={{ marginTop: '3rem', width: '100%', height: '289px' }}
       disabledDate={(disablePast && disabledDate) || undefined} // can not select days before today
     />
-  );
+  )
 
   return (
     <Picker
@@ -174,7 +171,7 @@ export default function RangePicker({
             transition ease-linear
             hover:border-blue-400 
             p-1 px-2 pl-4 ${
-              disabled && "cursor-not-allowed opacity-40"
+              disabled && 'cursor-not-allowed opacity-40'
             } ${className}`}
             {...rest}
           >
@@ -186,30 +183,32 @@ export default function RangePicker({
               value={
                 (isValidRange(value) &&
                   `${format(value[0])} ~ ${format(value[1])}`) ||
-                ""
+                ''
               }
-              className={`${disabled ? "cursor-not-allowed" : ""} text-sm `}
+              className={`${disabled ? 'cursor-not-allowed' : ''} text-sm `}
             />
             {!isEmpty && (
-              <CloseIcon
+              <Icon
+                icon="eva:close-outline"
                 className="date-input__icons__icon"
                 onClick={(e) => {
-                  e.stopPropagation();
-                  !disabled && clearInput();
+                  e.stopPropagation()
+                  !disabled && clearInput()
                 }}
                 style={{
-                  fontSize: "19px",
-                  cursor: "pointer",
-                  color: "#aaa",
+                  fontSize: '19px',
+                  cursor: 'pointer',
+                  color: '#aaa',
                 }}
               />
             )}
-            <CalendarIcon
-              style={{ fontSize: "18px", color: "var(--primary-color)" }}
+            <Icon
+              icon="eva:calendar-outline"
+              style={{ fontSize: '18px', color: 'var(--primary-color)' }}
             />
           </div>
-        );
+        )
       }}
     </Picker>
-  );
+  )
 }

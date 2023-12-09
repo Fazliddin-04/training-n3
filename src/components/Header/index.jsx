@@ -1,5 +1,4 @@
 import { Box } from '@mui/material'
-import IconGenerator from '../IconPicker/IconGenerator'
 import styles from './style.module.scss'
 
 const Header = ({
@@ -7,7 +6,6 @@ const Header = ({
   subtitle,
   extra,
   children,
-  icon,
   sticky,
   ...props
 }) => {
@@ -18,8 +16,6 @@ const Header = ({
       {...props}
     >
       <div className={styles.leftSide}>
-        {icon && <IconGenerator className={styles.icon} icon={icon} />}
-
         <div className={styles.titleBlock}>
           {title && <div className={styles.title}>{title}</div>}
           {subtitle && <div className={styles.subtitle}>{subtitle}</div>}

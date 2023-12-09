@@ -1,59 +1,56 @@
-import {
-  Close as CloseIcon,
-  CalendarToday as CalendarIcon,
-} from "@mui/icons-material";
-import { useTheme } from "@mui/material";
-import moment from "moment";
-import { useEffect, useRef } from "react";
-import { useState } from "react";
+import { Icon } from '@iconify/react'
+import { useTheme } from '@mui/material'
+import moment from 'moment'
+import { useEffect, useRef } from 'react'
+import { useState } from 'react'
 
 const DateInput = ({
   setCalendarVisible,
   selectedDate,
   setSelectedDate,
   placeholder,
-  className = "",
+  className = '',
   style,
   disabled,
   onChange,
   hideTimeBlock,
-  dateformat = "DD-MM-YYYY",
+  dateformat = 'DD-MM-YYYY',
 }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [focus, setFocus] = useState(false);
-  const inputRef = useRef();
-  const theme = useTheme();
+  const [inputValue, setInputValue] = useState('')
+  const [focus, setFocus] = useState(false)
+  const inputRef = useRef()
+  const theme = useTheme()
 
   useEffect(() => {
     setInputValue(
       selectedDate
         ? selectedDate?.format(
-            hideTimeBlock ? dateformat : "DD-MM-YYYY HH:mm:ss",
+            hideTimeBlock ? dateformat : 'DD-MM-YYYY HH:mm:ss'
           )
-        : "",
-    );
-  }, [selectedDate, hideTimeBlock]);
+        : ''
+    )
+  }, [selectedDate, hideTimeBlock])
 
   const clearInput = () => {
-    setSelectedDate(null);
-    onChange(null);
-    setCalendarVisible(false);
-  };
+    setSelectedDate(null)
+    onChange(null)
+    setCalendarVisible(false)
+  }
 
-  const onInputFocus = () => setFocus(true);
+  const onInputFocus = () => setFocus(true)
 
-  const onInputBlur = () => setFocus(false);
+  const onInputBlur = () => setFocus(false)
 
-  const calendarIconClick = () => inputRef.current.focus();
+  const calendarIconClick = () => inputRef.current.focus()
 
   useEffect(() => {
-    if (focus) return setCalendarVisible(true);
+    if (focus) return setCalendarVisible(true)
 
-    const inputValueMoment = moment(inputValue, "DD-MM-YYYY HH:mm:ss");
+    const inputValueMoment = moment(inputValue, 'DD-MM-YYYY HH:mm:ss')
 
-    if (inputValueMoment.isValid()) setSelectedDate(inputValueMoment);
-    else setInputValue(selectedDate?.format("DD-MM-YYYY HH:mm:ss") ?? "");
-  }, [focus]);
+    if (inputValueMoment.isValid()) setSelectedDate(inputValueMoment)
+    else setInputValue(selectedDate?.format('DD-MM-YYYY HH:mm:ss') ?? '')
+  }, [focus])
 
   return (
     <div
@@ -74,7 +71,7 @@ const DateInput = ({
       transition ease-linear
       hover:border-gray-400 
       p-1 px-2 pl-4 ${className} ${
-        disabled ? "cursor-not-allowed opacity-40" : ""
+        disabled ? 'cursor-not-allowed opacity-40' : ''
       }`}
     >
       <input
@@ -87,24 +84,26 @@ const DateInput = ({
         ref={inputRef}
         disabled={disabled}
         style={{ color: theme?.palette?.background?.contrastText }}
-        className={`${disabled ? "cursor-not-allowed" : ""}`}
+        className={`${disabled ? 'cursor-not-allowed' : ''}`}
       />
 
       <div className="date-input__icons">
         {selectedDate && (
-          <CloseIcon
+          <Icon
+            icon="eva:close-outline"
             className="date-input__icons__icon"
             onClick={clearInput}
-            style={{ marginRight: "5px" }}
+            style={{ marginRight: '5px' }}
           />
         )}
-        <CalendarIcon
+        <Icon
+          icon="eva:calendar-outline"
           className="date-input__icons__icon"
           onClick={calendarIconClick}
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DateInput;
+export default DateInput
