@@ -8,7 +8,6 @@ import aggregatorIcon from '@/assets/icons/aggregator.svg'
 import telegramIcon from '@/assets/icons/telegram.png'
 import cash from '@/assets/icons/cash.svg'
 import payme from '@/assets/icons/payme_logo.svg'
-import click from '@/assets/icons/click_logo.svg'
 import apelsin from '@/assets/icons/apelsin.svg'
 import epay from '@/assets/icons/epay_icon.png'
 import bank from '@/assets/icons/transfer.svg'
@@ -139,8 +138,6 @@ export function getSourceIcon(source) {
 
 export const paymentTypeIconMake = (type) => {
   switch (type) {
-    case 'click':
-      return click
     case 'payme':
       return payme
     case 'apelsin':
@@ -197,7 +194,7 @@ export const payment_types = genSelectOption([
 export const paymentImgs = {
   cash: cash,
   payme: payme,
-  click: click,
+  click: payme,
   uzum: apelsin,
   apelsin: apelsin,
   epay: epay,
