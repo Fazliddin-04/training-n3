@@ -11,7 +11,6 @@ import shape from "./shape";
 import palette from "./palette";
 import typography from "./typography";
 import breakpoints from "./breakpoints";
-import GlobalStyles from "./globalStyles";
 import componentsOverride from "./overrides";
 import shadows, { customShadows } from "./shadows";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
@@ -46,7 +45,6 @@ export default function ThemeConfig({ isLight = true, children }) {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <GlobalStyles />
         {children}
       </ThemeProvider>
     </StyledEngineProvider>
